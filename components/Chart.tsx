@@ -12,19 +12,29 @@ export const ChartContainer = ({ children, height }: CharContainerProps) => (
     </div>
 )
 
+type BGColors = {
+    green: string
+    red: string
+}
+
 type BarProps = {
     n: number
-    barEffects: Record<number, string>
+    barEffects: keyof BGColors
+}
+
+const barBg: BGColors = {
+    green: "bg-green-500",
+    red: "bg-red-500",
 }
 
 export const Bar = ({ n, barEffects }: BarProps) => {
     const height = `${scale(n, 10)}px`
-    const color = barEffects ? `bg-${barEffects}-500` : "bg-gray-400"
+    const styles = `${
+        barBg[barEffects] || "bg-gray-300"
+    } w-4 text-black text-center`
+
     return (
-        <div
-            className={`${color} w-4 text-black text-center`}
-            style={{ height }}
-        >
+        <div className={styles} style={{ height }}>
             {n}
         </div>
     )
