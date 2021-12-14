@@ -19,7 +19,7 @@ type BGColors = {
 
 type BarProps = {
     n: number
-    barEffects: keyof BGColors
+    barEffects: string
 }
 
 const barBg: BGColors = {
@@ -30,7 +30,7 @@ const barBg: BGColors = {
 export const Bar = ({ n, barEffects }: BarProps) => {
     const height = `${scale(n, 10)}px`
     const styles = `${
-        barBg[barEffects] || "bg-gray-300"
+        barBg[barEffects as keyof BGColors] || "bg-gray-300"
     } w-4 text-black text-center`
 
     return (
