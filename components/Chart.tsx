@@ -33,9 +33,5 @@ export const Bar = ({ n, barEffects }: BarProps) => {
         barBg[barEffects as keyof BGColors] || "bg-gray-300"
     } w-4 text-black text-center`
 
-    return (
-        <div className={styles} style={{ height }}>
-            {n}
-        </div>
-    )
+    return <div className={styles} style={{ height }}></div>
 }
