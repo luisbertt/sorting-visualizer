@@ -4,14 +4,13 @@ import { ChartContainer, Bar } from "components/Chart"
 import {
     Stats,
     Controls,
-    GenerateArray,
     TimelineControl,
     AlgorithmsControl,
     AlgorithmCheckbox,
 } from "components/Controls"
 import Layout from "components/Layout"
 import useSortingVisualizer from "hooks/useSortingVisualizer"
-import { generateNumberArray, scale } from "utils"
+import { generateNumberArray } from "utils"
 import algorithms from "algorithms"
 
 const Home = () => {
@@ -34,22 +33,29 @@ const Home = () => {
 
     return (
         <Layout title="Sorting Visualizer">
-            <ChartContainer height={`${scale(displayedArray.length, 10)}px`}>
-                {displayedArray.map((n, index) => (
-                    <Bar key={n} n={n} barEffects={barEffects[index]} />
-                ))}
-            </ChartContainer>
-            <Stats stats={stats} />
+            <h1 className="text-4xl font-bold my-2">Sorting Visualizer</h1>
             <Controls>
-                <GenerateArray setNumberArray={setNumberArray} />
                 <TimelineControl>
+                    <Button
+                        onClick={() => setNumberArray(generateNumberArray(50))}
+                    >
+                        Generate Array
+                    </Button>
                     <Button onClick={step}>Step</Button>
                     <Button onClick={reset}>Reset</Button>
                     <Button onClick={() => setPlaying((playing) => !playing)}>
                         {playing ? "Pause" : "Play"}
                     </Button>
                 </TimelineControl>
+            </Controls>
+            <div className="flex relative">
+                <ChartContainer>
+                    {displayedArray.map((n, index) => (
+                        <Bar key={n} n={n} barEffects={barEffects[index]} />
+                    ))}
+                </ChartContainer>
                 <AlgorithmsControl>
+                    <p className="font-bold">Algorithms:</p>
                     {Object.entries(algorithms).map(([name, generator]) => (
                         <AlgorithmCheckbox
                             key={name}
@@ -60,7 +66,8 @@ const Home = () => {
                         />
                     ))}
                 </AlgorithmsControl>
-            </Controls>
+            </div>
+            <Stats stats={stats} />
         </Layout>
     )
 }

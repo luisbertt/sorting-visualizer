@@ -7,7 +7,7 @@ type LayoutProps = {
 }
 
 const Layout = ({ children, title }: LayoutProps) => (
-    <div className="bg-black">
+    <div>
         <Head>
             <title>{title}</title>
             <meta charSet="utf-8" />
@@ -16,8 +16,8 @@ const Layout = ({ children, title }: LayoutProps) => (
                 content="initial-scale=1.0, width=device-width"
             />
         </Head>
-        <main className="flex flex-col h-screen justify-center items-center space-y-4 text-white">
-            {children}
+        <main className="flex h-screen justify-center items-center">
+            <div>{children}</div>
         </main>
         <footer></footer>
     </div>

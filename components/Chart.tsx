@@ -3,13 +3,10 @@ import { scale } from "utils"
 
 type CharContainerProps = {
     children: ReactNode
-    height: string
 }
 
-export const ChartContainer = ({ children, height }: CharContainerProps) => (
-    <div className="flex items-end text-xs space-x-1" style={{ height }}>
-        {children}
-    </div>
+export const ChartContainer = ({ children }: CharContainerProps) => (
+    <div className="flex items-end space-x-1">{children}</div>
 )
 
 type BGColors = {
@@ -28,10 +25,8 @@ const barBg: BGColors = {
 }
 
 export const Bar = ({ n, barEffects }: BarProps) => {
-    const height = `${scale(n, 10)}px`
-    const styles = `${
-        barBg[barEffects as keyof BGColors] || "bg-gray-300"
-    } w-4 text-black text-center`
+    const height = `${scale(n, 5)}px`
+    const styles = `${barBg[barEffects as keyof BGColors] || "bg-gray-200"} w-2`
 
     return <div className={styles} style={{ height }}></div>
 }
